@@ -1,0 +1,11 @@
+.home-container {
+  padding: 40px;
+  background-color: #f9f9f9;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+  gap: 20px;
+  justify-items: center;
+}
