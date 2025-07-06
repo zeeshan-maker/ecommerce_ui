@@ -14,7 +14,6 @@ const AdminDashboard = () => {
       const response = await getAllProducts();
       setProducts(response);
     } catch (error) {
-      console.log("####333",error)
       toast.error(error?.response?.data?.message)
     }
    }
@@ -35,6 +34,11 @@ const AdminDashboard = () => {
       toast.error(error.response.data.error)
     }
   };
+  if(products.length === 0){
+    return(
+      <h1 className='product-heading'>Data Not Found</h1>
+    )
+  }
 
   return (
     <div className="product-list-container">

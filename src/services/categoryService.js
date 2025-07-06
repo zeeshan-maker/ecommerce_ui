@@ -8,3 +8,13 @@ export const fetchCategories = async () =>{
         throw error;
     }
 }
+
+
+export const addCategories = async (name) =>{
+    try {
+        const response = await API.post('/category',{name});
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
