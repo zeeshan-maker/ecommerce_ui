@@ -1,14 +1,14 @@
 // api.js
-import axios from 'axios';
+import axios from "axios";
 
 const API = axios.create({
-  baseURL: 'http://localhost:4000/api/v1',
+  baseURL: "http://localhost:4000/api/v1",
 });
 
 // Add request interceptor to include token
 API.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('accessToken'); // or from Redux store
+    const token = localStorage.getItem("accessToken"); // or from Redux store
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -17,7 +17,7 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-
 // 🔄 Auto refresh token on 401
+
 
 export default API;

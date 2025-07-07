@@ -16,7 +16,7 @@ const Checkout = () => {
     city: '',
     postalCode: '',
     country: '',
-    paymentMethod: 'COD',
+    paymentMethod: '',
   });
 
   const handleChange = (e) => {
@@ -26,9 +26,9 @@ const Checkout = () => {
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
     // Handle order placement logic
-    if (form.paymentMethod === 'Online') {
+    if (form.paymentMethod === 'ONLINE') {
       try {
-        const res = await createStripeSession();
+        const res = await createStripeSession(form);
         window.location.href = res.url; // Redirect to Stripe
       } catch (err) {
         toast.error('Stripe error: ' + err.response?.data?.message || err.message);
@@ -44,7 +44,7 @@ const Checkout = () => {
           city: '',
           postalCode: '',
           country: '',
-          paymentMethod: 'COD',
+          paymentMethod: '',
         })
 
       } catch (error) {
@@ -113,8 +113,9 @@ const Checkout = () => {
           <div className="form-group">
             <label>Payment Method</label>
             <select name="paymentMethod" value={form.paymentMethod} onChange={handleChange}>
+              <option value="">Select payment method</option>
               <option value="COD">Cash on Delivery</option>
-              <option value="Online">Online Payment</option>
+              <option value="ONLINE">Online Payment</option>
             </select>
           </div>
 

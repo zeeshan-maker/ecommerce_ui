@@ -1,17 +1,37 @@
 // pages/Success.jsx
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { createOrder } from '../../services/orderService';
 
 
 
 const PaymentSuccess = () => {
-const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+
  useEffect(() => {
-    const timeout = setTimeout(() => {
-      navigate('/my-orders');
-    }, 3000);
-    return () => clearTimeout(timeout);
-  }, []);
+     const query = new URLSearchParams(location.search);
+    const shippingDetails = {
+      address: query.get('address'),
+      city: query.get('city'),
+      postalCode: query.get('postalCode'),
+      country: query.get('country'),
+      paymentMethod:query.get("paymentMethod")
+    };
+     const saveOrder = async () => {
+       try {
+            const res = await createOrder(shippingDetails);
+            toast.success(res.message)
+            navigate("/my-orders")
+          } catch (error) {
+            toast.error(error.response.data.error || error.response.data.message)
+          }
+     }
+     saveOrder();
+    
+  }, [location]);
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
