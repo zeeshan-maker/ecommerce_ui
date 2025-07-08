@@ -50,7 +50,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <div className="sidebar">
+      <div className="filter">
         <h3>Filter by Category</h3>
         <ul className="category-list">
           {categories.map((cat) => (
@@ -75,6 +75,7 @@ const Home = () => {
           ))}
         </div>
       </div>
+
     </div>
   );
 };

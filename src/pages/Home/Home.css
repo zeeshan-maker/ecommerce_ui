@@ -18,11 +18,13 @@
 }
 
 /* Sidebar styles */
-.sidebar {
+.filter {
   width: 220px;
-  background-color: #fafafa;
+  background-color: #fff;
   border-radius: 12px;
   padding: 20px;
+  border: 1px solid #ccc;
+  height: 400px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
