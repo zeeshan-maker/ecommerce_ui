@@ -5,15 +5,18 @@ import { getAllProducts } from "../../services/productService";
 import { fetchCategories } from "../../services/categoryService";
 
 const Home = () => {
-  const [allProducts, setAllProducts] = useState([]);
+  const [allProductsBackup, setAllProductsBackup] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     const getAllProduct = async () => {
       try {
         const productData = await getAllProducts();
-        setAllProducts(productData);
+        setAllProductsBackup(productData);
+        setFilteredProducts(productData);
+
         const res = await fetchCategories();
         setCategories(res);
       } catch (error) {
@@ -34,6 +37,15 @@ const Home = () => {
     }
 
     setSelectedCategories(updated);
+    // Filter products
+    if (updated.length === 0) {
+      setFilteredProducts(allProductsBackup);
+    } else {
+      const filtered = allProductsBackup.filter((product) =>
+        updated.includes(product.Category?.name || "Uncategorized")
+      );
+      setFilteredProducts(filtered);
+    }
   };
 
   return (
@@ -58,7 +70,7 @@ const Home = () => {
 
       <div className="products-area">
         <div className="products-grid">
-          {allProducts.map((product) => (
+          {filteredProducts.map((product) => (
             <ProductCard key={product.product_id} product={product} />
           ))}
         </div>
