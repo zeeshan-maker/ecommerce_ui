@@ -15,6 +15,7 @@ const MyOrders = () => {
     const fetchOrders = async () => {
       try {
         const res = await getMyOrders();
+        console.log("########3",res.orders)
         setOrders(res.orders);
 
          const cartData = await getCart();
@@ -38,7 +39,7 @@ const MyOrders = () => {
           <div className="order-card" key={order.order_id}>
             <div className="order-header">
               <span>Order ID: {order.order_id}</span>
-              <span>Status: <strong>{order.status}</strong></span>
+              <span>Status: <strong>{order.payment_status}</strong></span>
               <span>Total: ₹{order.total_amount}</span>
               <span>Date: {new Date(order.createdAt).toLocaleDateString()}</span>
             </div>
