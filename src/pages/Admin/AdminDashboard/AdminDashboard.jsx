@@ -51,6 +51,7 @@ const AdminDashboard = () => {
           <span>Category</span>
           <span>Action</span>
         </div>
+        <div className='list'>
         {products.map(product => (
           <div className="product-row" key={product.product_id}>
             <div><img src={getImageURL(product.image)} alt={product.name} /></div>
@@ -62,6 +63,7 @@ const AdminDashboard = () => {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </div>
   );

@@ -3,7 +3,9 @@ import ProtectedRoute from "./ProtectedRoute";
 import AdminDashboard from "../pages/Admin/AdminDashboard/AdminDashboard";
 import AddProduct from "../pages/Admin/AddProduct/AddProduct";
 import AdminLayout from "../layouts/AdminLayout";
-import AddCategory from "../pages/Admin/AddCategory/AddCategory"
+import AddCategory from "../pages/Admin/AddCategory/AddCategory";
+import Orders from "../pages/Admin/Orders/Orders";
+
 const AdminRoutes = () => {
   return (
     <Routes>
@@ -34,6 +36,17 @@ const AdminRoutes = () => {
           <ProtectedRoute allowedRoles={["Admin"]}>
             <AdminLayout>
               <AddCategory />
+            </AdminLayout>
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/orders"
+        element={
+          <ProtectedRoute allowedRoles={["Admin"]}>
+            <AdminLayout>
+              <Orders />
             </AdminLayout>
           </ProtectedRoute>
         }

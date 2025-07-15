@@ -1,6 +1,7 @@
 .product-list-container {
   padding: 20px;
-  height: 100vh;
+  height: 80vh;
+  overflow-y: hidden;
 }
 
 .product-heading{
@@ -51,3 +52,9 @@
 .remove-btn:hover {
   background-color: #c0392b;
 }
+
+.list{
+  height: 70vh;
+  overflow: scroll;
+}
+

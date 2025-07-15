@@ -17,3 +17,13 @@ export const getMyOrders = async () =>{
         throw error;
     }
 }
+
+
+export const getAllOrders = async () =>{
+    try {
+        const res = await API.get('/order/admin/all');
+        return res.data;
+    } catch (error) {
+        throw error;
+    }
+}

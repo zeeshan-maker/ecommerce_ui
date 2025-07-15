@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FaPlus, FaTags } from "react-icons/fa"; // icons
+import { FaPlus, FaTags, FaShoppingCart } from "react-icons/fa"; // icons
 import { MdInventory2 } from "react-icons/md";
 import "./Sidebar.css";
 
@@ -32,6 +32,16 @@ const Sidebar = () => (
         >
           <FaTags className="sidebar-icon" />
           Category
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          to="/admin/orders"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
+          <FaShoppingCart className="sidebar-icon" />
+          Orders
         </NavLink>
       </li>
     </ul>
