@@ -7,14 +7,16 @@
   font-size: 24px;
   margin-bottom: 15px;
   color: #333;
+  text-align: center;
 }
 
 .orders-table {
-  width: 100%;
+  width: 90%;
+  margin: auto;
   border-collapse: collapse;
   background-color: white;
   border-radius: 8px;
-  /* overflow: hidden; */
+  overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
@@ -69,3 +71,18 @@
   padding: 20px;
   color: #777;
 }
+
+.status-dropdown {
+  width: 120px;
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+.status-dropdown:focus {
+  outline: none;
+  border-color: #007bff;
+}
+

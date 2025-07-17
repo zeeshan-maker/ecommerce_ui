@@ -27,3 +27,12 @@ export const getAllOrders = async () =>{
         throw error;
     }
 }
+
+export const updateOrder = async (orderId, status) =>{
+    try {
+        const res = await API.patch(`/order/admin/status/${orderId}`,{status})
+        return res.data;
+    } catch (error) {
+        throw error;
+    }
+}
