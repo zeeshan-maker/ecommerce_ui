@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 export const useAuthSelector = () =>{
     return {
         isAuthenticated: useSelector((state)=>state.auth.isAuthenticated),
-        accessToken: useSelector((state)=>state.auth.accessToken)
+        accessToken: useSelector((state)=>state.auth.accessToken),
+        user: useSelector((state) => state.auth.user)
     }
 }
 

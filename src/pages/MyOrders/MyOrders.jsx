@@ -5,10 +5,12 @@ import { toast } from "react-toastify";
 import getImageURL from "../../utils/getImageURL";
 import useDispatcher from "../../redux/useDispatcher";
 import { getCart } from "../../services/cartService";
+import socket from "../../socket/socket"; // ✅ import socket instance
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
   const { setCart } = useDispatcher();
+
   const getOrderStage = (status) => {
     switch (status.toLowerCase()) {
       case "pending":
@@ -24,12 +26,7 @@ const MyOrders = () => {
     }
   };
 
-  const orderStages = [
-    "Placed",
-    "Confirmed",
-    "Shipped",
-    "Delivered",
-  ];
+  const orderStages = ["Placed", "Confirmed", "Shipped", "Delivered"];
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -42,13 +39,30 @@ const MyOrders = () => {
         toast.error(err.response?.data?.message || "Failed to load orders");
       }
     };
+
     fetchOrders();
-  }, []);
+
+    // ✅ Listen for real-time order updates
+    socket.on("order_status_updated", ({ orderId, status }) => {
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order.order_id === orderId
+            ? { ...order, status } // Update status
+            : order
+        )
+      );
+      toast.info(`Order #${orderId} status updated to ${status}`);
+    });
+
+    // Cleanup
+    return () => {
+      socket.off("order_status_updated");
+    };
+  }, [setCart]);
 
   return (
     <div className="my-orders-container">
       <h2 className="page-title">My Orders</h2>
-
       {orders.length === 0 ? (
         <p className="empty-message">You have no orders yet.</p>
       ) : (
@@ -60,9 +74,7 @@ const MyOrders = () => {
               </div>
               <div>
                 <strong>Payment Status:</strong>{" "}
-                <span
-                  className={`status ${order.payment_status.toLowerCase()}`}
-                >
+                <span className={`status ${order.payment_status.toLowerCase()}`}>
                   {order.payment_status}
                 </span>
               </div>
@@ -89,11 +101,12 @@ const MyOrders = () => {
                   </div>
                 </div>
               ))}
+
               <div className="order-tracker">
                 {orderStages.map((stage, index) => (
-                  <div className={`tracker-step ${ index < getOrderStage(order.status)
-                        ? "active"
-                        : ""
+                  <div
+                    className={`tracker-step ${
+                      index < getOrderStage(order.status) ? "active" : ""
                     }`}
                     key={index}
                   >
