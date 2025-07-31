@@ -1,6 +1,6 @@
 
 const getImagePath = (path) =>{
-    return `https://ecommerce-api-ip3v.onrender.com/${path}`
+    return `http://localhost:4000/${path}`
 }
 
 export default getImagePath;

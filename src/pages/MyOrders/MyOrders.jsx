@@ -4,8 +4,7 @@ import { getMyOrders } from "../../services/orderService";
 import { toast } from "react-toastify";
 import getImageURL from "../../utils/getImageURL";
 import useDispatcher from "../../redux/useDispatcher";
-import { getCart } from "../../services/cartService";
-import socket from "../../socket/socket"; // ✅ import socket instance
+import { getCart } from "../../services/cartService"; 
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -42,22 +41,7 @@ const MyOrders = () => {
 
     fetchOrders();
 
-    // ✅ Listen for real-time order updates
-    socket.on("order_status_updated", ({ orderId, status }) => {
-      setOrders((prevOrders) =>
-        prevOrders.map((order) =>
-          order.order_id === orderId
-            ? { ...order, status } // Update status
-            : order
-        )
-      );
-      toast.info(`Order #${orderId} status updated to ${status}`);
-    });
-
-    // Cleanup
-    return () => {
-      socket.off("order_status_updated");
-    };
+  
   }, [setCart]);
 
   return (

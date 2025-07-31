@@ -8,7 +8,7 @@ import { getCart } from './services/cartService';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useAuthSelector } from './redux/useSelectors';
-import AppSocketInit from './socket/AppSocketInit';
+
 
 function App() {
     const { setCart } = useDispatcher();
@@ -33,7 +33,6 @@ function App() {
 
   return (
       <BrowserRouter>
-      <AppSocketInit />
         <Navbar />
         <AppRoutes />
          <ToastContainer position="top-right" autoClose={3000} />

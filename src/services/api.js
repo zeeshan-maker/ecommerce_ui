@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://ecommerce-api-ip3v.onrender.com/api/v1",
+  baseURL: "http://localhost:4000/api/v1",
 });
 
 // Add request interceptor to include token
