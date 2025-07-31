@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './Checkout.css';
 import { useNavigate } from 'react-router-dom';
 import { useCartSelector } from "../../redux/useSelectors";
-import getImageURL from "../../utils/getImageURL";
 import { createOrder } from '../../services/orderService';
 import { toast } from 'react-toastify';
 import { createStripeSession } from '../../services/paymentService';
@@ -66,7 +65,7 @@ const Checkout = () => {
           {cart.map((item) => (
             <div className="summary-item" key={item.product_id}>
               <img
-                src={item.Product.image ? getImageURL(item.Product.image) : ""}
+                src={item.Product.image ? item.Product.image : ""}
                 alt={item.Product.name}
                 className="summary-image"
               />

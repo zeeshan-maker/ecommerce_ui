@@ -2,7 +2,6 @@ import './AdminDashboard.css';
 import { getAllProducts, removeProduct } from '../../../services/productService';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import getImageURL from "../../../utils/getImageURL"
 
 const AdminDashboard = () => {
   const [products, setProducts] = useState([])
@@ -54,7 +53,7 @@ const AdminDashboard = () => {
         <div className='list'>
         {products.map(product => (
           <div className="product-row" key={product.product_id}>
-            <div><img src={getImageURL(product.image)} alt={product.name} /></div>
+            <div><img src={product.image} alt={product.name} /></div>
             <div>{product.name}</div>
             <div>₹{product.price}</div>
             <div>{product.Category.name}</div>

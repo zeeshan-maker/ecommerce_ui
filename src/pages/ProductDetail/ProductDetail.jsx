@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './ProductDetail.css';
 import { getProductById } from '../../services/productService';
-import getImagePath from '../../utils/getImageURL';
 import { useAuthSelector } from '../../redux/useSelectors';
 import { toast } from 'react-toastify';
 import { addToCart } from '../../services/cartService';
@@ -56,7 +55,7 @@ const ProductDetail = () => {
   return (
     <div className="detail-container">
       <div className="image-section">
-        <img src={getImagePath(product.image)} alt={product.name} />
+        <img src={product.image} alt={product.name} />
       </div>
 
       <div className="info-section">

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./MyOrders.css";
 import { getMyOrders } from "../../services/orderService";
 import { toast } from "react-toastify";
-import getImageURL from "../../utils/getImageURL";
 import useDispatcher from "../../redux/useDispatcher";
 import { getCart } from "../../services/cartService"; 
 
@@ -75,7 +74,7 @@ const MyOrders = () => {
               {order.OrderItems.map((item) => (
                 <div className="order-item" key={item.orderItem_id}>
                   <img
-                    src={getImageURL(item.Product.image)}
+                    src={item.Product.image}
                     alt={item.Product.name}
                   />
                   <div className="item-details">
